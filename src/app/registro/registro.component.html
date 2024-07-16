@@ -1,0 +1,227 @@
+<nav
+  class="navbar navbar-expand-lg mt-auto navbar-light fixed-top"
+  id="mainNav"
+>
+  <div class="container">
+    <a class="navbar-brand" href="index.html">Prácticas</a>
+    <button
+      data-bs-toggle="collapse"
+      data-bs-target="#navbarResponsive"
+      class="navbar-toggler"
+      aria-controls="navbarResponsive"
+      aria-expanded="false"
+      aria-label="Toggle navigation"
+    >
+      <i class="fa fa-bars"></i>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarResponsive">
+      <ul class="navbar-nav ms-auto text-uppercase">
+        <li class="nav-item">
+          <a class="nav-link" routerLink="/acerca-de">Acerca de</a>
+        </li>
+        <li
+          *ngIf="
+            userActual && userActual.tipo === 'Estudiante' && userActual.tutor
+          "
+          class="nav-item"
+        >
+          <a class="nav-link" routerLink="/solicitud">Postular</a>
+        </li>
+        <li *ngIf="userActual && userActual.tipo === 'Admin'" class="nav-item">
+          <a class="nav-link" routerLink="/asignar">Asignar tutores</a>
+        </li>
+        <li
+          *ngIf="
+            userActual && userActual.tipo === 'Estudiante' && userActual.tutor
+          "
+          class="nav-item"
+        >
+          <a class="nav-link" routerLink="/agregar">Reportar tarea</a>
+        </li>
+        <li
+          *ngIf="userActual && userActual.tipo === 'Profesor'"
+          class="nav-item"
+        >
+          <a class="nav-link" routerLink="/seguimiento">Seguimiento</a>
+        </li>
+        <li *ngIf="!userActual" class="nav-item">
+          <a class="nav-link" routerLink="/login">Iniciar sesion</a>
+        </li>
+      </ul>
+    </div>
+  </div>
+</nav>
+<header class="masthead" style="background-image: url('/home-bg.jpg')">
+  <div class="overlay"></div>
+  <div class="container">
+    <div class="row">
+      <div class="col-md-10 col-lg-8 mx-auto position-relative">
+        <div
+          class="d-flex d-xl-flex align-items-center align-items-xl-center"
+          style="width: 100%; height: 100%"
+        >
+          <div class="container mt-5">
+            <div class="card shadow-lg o-hidden border-0 my-5">
+              <div class="card-body p-0">
+                <div class="row justify-content-center">
+                  <div class="col-lg-9">
+                    <div class="p-5">
+                      <div class="text-center">
+                        <h4 class="text-dark mb-4">Registro</h4>
+                      </div>
+                      <form [formGroup]="registerForm" (ngSubmit)="onSubmit()">
+                        <div class="mb-3">
+                          <input
+                            class="form-control"
+                            type="text"
+                            placeholder="Nombres"
+                            formControlName="nombres"
+                            (keypress)="preventNumbers($event)"
+                          />
+                          <div
+                            *ngIf="
+                              registerForm.get('nombres')?.invalid &&
+                              registerForm.get('nombres')?.touched
+                            "
+                            class="text-danger"
+                          >
+                            Nombres es obligatorio y debe tener al menos 10
+                            caracteres.
+                          </div>
+                        </div>
+                        <div class="mb-3">
+                          <input
+                            class="form-control"
+                            type="text"
+                            placeholder="Apellidos"
+                            formControlName="apellidos"
+                            (keypress)="preventNumbers($event)"
+                          />
+                          <div
+                            *ngIf="
+                              registerForm.get('apellidos')?.invalid &&
+                              registerForm.get('apellidos')?.touched
+                            "
+                            class="text-danger"
+                          >
+                            Apellidos es obligatorio y debe tener al menos 10
+                            caracteres.
+                          </div>
+                        </div>
+                        <div class="mb-3">
+                          <input
+                            class="form-control"
+                            type="text"
+                            placeholder="CI"
+                            formControlName="ci"
+                          />
+                          <div
+                            *ngIf="
+                              registerForm.get('ci')?.invalid &&
+                              registerForm.get('ci')?.touched
+                            "
+                            class="text-danger"
+                          >
+                            CI es obligatorio y debe tener exactamente 10
+                            caracteres.
+                          </div>
+                        </div>
+                        <div class="mb-3">
+                          <input
+                            class="form-control"
+                            type="email"
+                            placeholder="Correo"
+                            formControlName="correo"
+                          />
+                          <div
+                            *ngIf="
+                              registerForm.get('correo')?.invalid &&
+                              registerForm.get('correo')?.touched
+                            "
+                            class="text-danger"
+                          >
+                            Correo es obligatorio y debe ser un email válido con
+                            el dominio &#64;live.uleam.edu.ec.
+                          </div>
+                        </div>
+                        <div class="mb-3">
+                          <input
+                            class="form-control"
+                            type="password"
+                            placeholder="Contraseña"
+                            formControlName="contraseña"
+                          />
+                          <div
+                            *ngIf="
+                              registerForm.get('contraseña')?.invalid &&
+                              registerForm.get('contraseña')?.touched
+                            "
+                            class="text-danger"
+                          >
+                            Contraseña es obligatorio y debe tener al menos 6
+                            caracteres.
+                          </div>
+                        </div>
+                        <div class="mb-3">
+                          <input
+                            class="form-control"
+                            type="password"
+                            placeholder="Repetir contraseña"
+                            formControlName="contraseña2"
+                          />
+                          <div
+                            *ngIf="
+                              registerForm.get('contraseña2')?.invalid &&
+                              registerForm.get('contraseña2')?.touched
+                            "
+                            class="text-danger"
+                          >
+                            Repetir contraseña es obligatorio y debe tener al
+                            menos 6 caracteres.
+                          </div>
+                        </div>
+                        <div class="mb-3 d-flex justify-content-center">
+                          <button
+                            class="btn d-block btn-secondary"
+                            type="submit"
+                            style="
+                              height: 40px;
+                              padding: initial;
+                              width: 110px;
+                              border-radius: 5px;
+                              border-width: 0px;
+                            "
+                          >
+                            Registrar
+                          </button>
+                        </div>
+                        <hr />
+                      </form>
+                      <div class="text-center">
+                        <span class="text-muted fs-6"
+                          >Ya tienes una cuenta?
+                          <a class="text-primary" routerLink="/login"
+                            >Inicia sesión</a
+                          ></span
+                        >
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</header>
+<footer>
+  <div class="container">
+    <div class="row">
+      <div class="col-md-10 col-lg-8 mx-auto">
+        <p class="text-muted copyright">Copyright&nbsp;©&nbsp;Prácticas 2024</p>
+      </div>
+    </div>
+  </div>
+</footer>

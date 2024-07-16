@@ -1,0 +1,80 @@
+<nav
+  class="navbar navbar-expand-lg mt-auto fixed-top navbar-light"
+  id="mainNav"
+>
+  <div class="container">
+    <a class="navbar-brand" routerLink="/index">Prácticas</a
+    ><button
+      data-bs-toggle="collapse"
+      data-bs-target="#navbarResponsive"
+      class="navbar-toggler"
+      aria-controls="navbarResponsive"
+      aria-expanded="false"
+      aria-label="Toggle navigation"
+    >
+      <i class="fa fa-bars"></i>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarResponsive">
+      <ul class="navbar-nav ms-auto text-uppercase">
+        <li class="nav-item">
+          <a class="nav-link" routerLink="/acerca-de">Acerca de</a>
+        </li>
+        <li
+          *ngIf="
+            userActual && userActual.tipo === 'Estudiante' && userActual.tutor
+          "
+          class="nav-item"
+        >
+          <a class="nav-link" routerLink="/solicitud">Postular</a>
+        </li>
+        <li *ngIf="userActual && userActual.tipo === 'Admin'" class="nav-item">
+          <a class="nav-link" routerLink="/asignar">Asignar tutores</a>
+        </li>
+        <li
+          *ngIf="
+            userActual && userActual.tipo === 'Estudiante' && userActual.tutor
+          "
+          class="nav-item"
+        >
+          <a class="nav-link" routerLink="/agregar">Reportar tarea</a>
+        </li>
+        <li
+          *ngIf="userActual && userActual.tipo === 'Profesor'"
+          class="nav-item"
+        >
+          <a class="nav-link" routerLink="/seguimiento">Seguimiento</a>
+        </li>
+        <li *ngIf="!userActual" class="nav-item">
+          <a class="nav-link" routerLink="/login">Iniciar sesion</a>
+        </li>
+        <li *ngIf="userActual" class="nav-item">
+          <a (click)="cerrarSesion()" class="btn btn-danger">Cerrar sesión</a>
+        </li>
+      </ul>
+    </div>
+  </div>
+</nav>
+<header class="masthead" style="background-image: url('home-bg.jpg')">
+  <div class="overlay"></div>
+  <div class="container">
+    <div class="row">
+      <div class="col-md-10 col-lg-8 mx-auto position-relative">
+        <div class="site-heading">
+          <h1>Prácticas</h1>
+          <span class="subheading"
+            >Prácticas pre-profesionales de la ULEAM</span
+          >
+        </div>
+      </div>
+    </div>
+  </div>
+</header>
+<footer>
+  <div class="container">
+    <div class="row">
+      <div class="col-md-10 col-lg-8 mx-auto">
+        <p class="text-muted copyright">Copyright&nbsp;©&nbsp;Prácticas 2024</p>
+      </div>
+    </div>
+  </div>
+</footer>

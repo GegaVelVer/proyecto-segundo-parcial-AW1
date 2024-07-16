@@ -1,0 +1,118 @@
+<nav
+  class="navbar navbar-expand-lg mt-auto navbar-light fixed-top"
+  id="mainNav"
+>
+  <div class="container">
+    <a class="navbar-brand" href="index.html">Prácticas</a>
+    <button
+      data-bs-toggle="collapse"
+      data-bs-target="#navbarResponsive"
+      class="navbar-toggler"
+      aria-controls="navbarResponsive"
+      aria-expanded="false"
+      aria-label="Toggle navigation"
+    >
+      <i class="fa fa-bars"></i>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarResponsive">
+      <ul class="navbar-nav ms-auto text-uppercase">
+        <li class="nav-item">
+          <a class="nav-link" routerLink="/acerca-de">Acerca de</a>
+        </li>
+        <li
+          *ngIf="
+            userActual && userActual.tipo === 'Estudiante' && userActual.tutor
+          "
+          class="nav-item"
+        >
+          <a class="nav-link" routerLink="/solicitud">Postular</a>
+        </li>
+        <li *ngIf="userActual && userActual.tipo === 'Admin'" class="nav-item">
+          <a class="nav-link" routerLink="/asignar">Asignar tutores</a>
+        </li>
+        <li
+          *ngIf="
+            userActual && userActual.tipo === 'Estudiante' && userActual.tutor
+          "
+          class="nav-item"
+        >
+          <a class="nav-link" routerLink="/agregar">Reportar tarea</a>
+        </li>
+        <li
+          *ngIf="userActual && userActual.tipo === 'Profesor'"
+          class="nav-item"
+        >
+          <a class="nav-link" routerLink="/seguimiento">Seguimiento</a>
+        </li>
+        <li *ngIf="!userActual" class="nav-item">
+          <a class="nav-link" routerLink="/login">Iniciar sesion</a>
+        </li>
+        <li *ngIf="userActual" class="nav-item">
+          <a (click)="cerrarSesion()" class="btn btn-danger">Cerrar sesión</a>
+        </li>
+      </ul>
+    </div>
+  </div>
+</nav>
+<header
+  class="masthead"
+  style="
+    background-image: url('/home-bg.jpg');
+    font-family: 'Open Sans', sans-serif;
+  "
+>
+  <div class="overlay"></div>
+  <div class="container">
+    <div class="row">
+      <div class="col-md-10 col-lg-8 mx-auto position-relative">
+        <div class="site-heading" style="font-family: 'Open Sans', sans-serif">
+          <div class="banner6">
+            <div class="row">
+              <div class="container">
+                <div class="col-12 align-justify-center pr-4 pl-0 contact-form">
+                  <h2 class="mb-4 text-white">Asignación de tutor</h2>
+                  <table class="table table-dark table-hover">
+                    <thead>
+                      <tr>
+                        <th scope="col">Estudiante</th>
+                        <th scope="col">Tutor</th>
+                      </tr>
+                    </thead>
+                    <tbody *ngFor="let estudiante of usuarios; let i = index">
+                      <tr
+                        *ngIf="
+                          estudiante.tipo === 'Estudiante' && !estudiante.tutor
+                        "
+                      >
+                        <td>
+                          {{ estudiante.nombres }} {{ estudiante.apellidos }}
+                          <br />
+                          {{ estudiante.correo }}
+                        </td>
+                        <td>
+                          <select
+                            class="form-select"
+                            aria-label="Default select example"
+                            (change)="asignarTutor(estudiante.id!, $event)"
+                          >
+                            <option disabled selected>Asigne un tutor</option>
+                            <option
+                              *ngFor="let profesor of profesores"
+                              [value]="profesor.id"
+                            >
+                              {{ profesor.nombres }}{{ profesor.apellidos }}
+                            </option>
+                          </select>
+                        </td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</header>

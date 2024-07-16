@@ -1,0 +1,94 @@
+<nav
+  class="navbar navbar-expand-lg mt-auto fixed-top navbar-light"
+  id="mainNav"
+>
+  <div class="container">
+    <a class="navbar-brand" href="index.html">Prácticas</a
+    ><button
+      data-bs-toggle="collapse"
+      data-bs-target="#navbarResponsive"
+      class="navbar-toggler"
+      aria-controls="navbarResponsive"
+      aria-expanded="false"
+      aria-label="Toggle navigation"
+    >
+      <i class="fa fa-bars"></i>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarResponsive">
+      <ul class="navbar-nav ms-auto text-uppercase">
+        <li class="nav-item">
+          <a class="nav-link" routerLink="/acerca-de">Acerca de</a>
+        </li>
+        <li
+          *ngIf="
+            userActual && userActual.tipo === 'Estudiante' && userActual.tutor
+          "
+          class="nav-item"
+        >
+          <a class="nav-link" routerLink="/solicitud">Postular</a>
+        </li>
+        <li *ngIf="userActual && userActual.tipo === 'Admin'" class="nav-item">
+          <a class="nav-link" routerLink="/asignar">Asignar tutores</a>
+        </li>
+        <li
+          *ngIf="
+            userActual && userActual.tipo === 'Estudiante' && userActual.tutor
+          "
+          class="nav-item"
+        >
+          <a class="nav-link" routerLink="/agregar">Reportar tarea</a>
+        </li>
+        <li
+          *ngIf="userActual && userActual.tipo === 'Profesor'"
+          class="nav-item"
+        >
+          <a class="nav-link" routerLink="/seguimiento">Seguimiento</a>
+        </li>
+        <li *ngIf="!userActual" class="nav-item">
+          <a class="nav-link" routerLink="/login">Iniciar sesion</a>
+        </li>
+        <li *ngIf="userActual" class="nav-item">
+          <a (click)="cerrarSesion()" class="btn btn-danger">Cerrar sesión</a>
+        </li>
+      </ul>
+    </div>
+  </div>
+</nav>
+<header
+  class="masthead"
+  style="background: url('/home-bg.jpg') center / cover no-repeat"
+>
+  <div class="overlay"></div>
+  <div class="container">
+    <div class="row">
+      <div class="col-md-10 col-lg-8 mx-auto position-relative">
+        <div class="site-heading">
+          <h1>Acerca de</h1>
+        </div>
+      </div>
+    </div>
+  </div>
+</header>
+<div class="container">
+  <div class="row">
+    <div class="col-md-10 col-lg-8 mx-auto">
+      <p>
+        Las prácticas pre-profesionales son experiencias formativas que permiten
+        a los estudiantes aplicar los conocimientos y habilidades adquiridos
+        durante su formación académica en un entorno laboral real. Estas
+        prácticas suelen ser obligatorias en muchas carreras y están diseñadas
+        para facilitar la transición de los estudiantes al mercado laboral.
+      </p>
+    </div>
+  </div>
+</div>
+<hr />
+<footer>
+  <div class="container">
+    <div class="row">
+      <div class="col-md-10 col-lg-8 mx-auto">
+        <p class="text-muted copyright">Copyright&nbsp;©&nbsp;Prácticas 2024</p>
+      </div>
+    </div>
+  </div>
+</footer>

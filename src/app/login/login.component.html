@@ -1,0 +1,151 @@
+<nav
+  class="navbar navbar-expand-lg mt-auto navbar-light fixed-top"
+  id="mainNav"
+>
+  <div class="container">
+    <a class="navbar-brand" href="index.html">Prácticas</a>
+    <button
+      data-bs-toggle="collapse"
+      data-bs-target="#navbarResponsive"
+      class="navbar-toggler"
+      aria-controls="navbarResponsive"
+      aria-expanded="false"
+      aria-label="Toggle navigation"
+    >
+      <i class="fa fa-bars"></i>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarResponsive">
+      <ul class="navbar-nav ms-auto text-uppercase">
+        <li class="nav-item">
+          <a class="nav-link" routerLink="/acerca-de">Acerca de</a>
+        </li>
+        <li
+          *ngIf="
+            userActual && userActual.tipo === 'Estudiante' && userActual.tutor
+          "
+          class="nav-item"
+        >
+          <a class="nav-link" routerLink="/solicitud">Postular</a>
+        </li>
+        <li *ngIf="userActual && userActual.tipo === 'Admin'" class="nav-item">
+          <a class="nav-link" routerLink="/asignar">Asignar tutores</a>
+        </li>
+        <li
+          *ngIf="
+            userActual && userActual.tipo === 'Estudiante' && userActual.tutor
+          "
+          class="nav-item"
+        >
+          <a class="nav-link" routerLink="/agregar">Reportar tarea</a>
+        </li>
+        <li
+          *ngIf="userActual && userActual.tipo === 'Profesor'"
+          class="nav-item"
+        >
+          <a class="nav-link" routerLink="/seguimiento">Seguimiento</a>
+        </li>
+        <li *ngIf="!userActual" class="nav-item">
+          <a class="nav-link" routerLink="/login">Iniciar sesion</a>
+        </li>
+      </ul>
+    </div>
+  </div>
+</nav>
+<header class="masthead" style="background-image: url('/home-bg.jpg')">
+  <div class="overlay"></div>
+  <div class="container">
+    <div class="row">
+      <div class="col-md-10 col-lg-8 mx-auto position-relative">
+        <div
+          class="d-flex d-xl-flex align-items-center align-items-xl-center"
+          style="width: 100%; height: 100%"
+        >
+          <div class="container mt-5">
+            <div class="card shadow-lg o-hidden border-0 my-5">
+              <div class="card-body p-0">
+                <div class="row justify-content-center">
+                  <div class="col-lg-9">
+                    <div class="p-5">
+                      <div class="text-center">
+                        <h4 class="text-dark mb-4">Inicio de sesión</h4>
+                      </div>
+                      <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
+                        <div class="mb-3">
+                          <input
+                            class="form-control"
+                            type="email"
+                            formControlName="correo"
+                            placeholder="Correo"
+                          />
+                          <div
+                            *ngIf="
+                              loginForm.get('correo')?.invalid &&
+                              loginForm.get('correo')?.touched
+                            "
+                            class="text-danger"
+                          >
+                            Por favor, ingrese un correo electrónico válido.
+                          </div>
+                        </div>
+                        <div class="mb-3">
+                          <input
+                            class="form-control"
+                            type="password"
+                            formControlName="contraseña"
+                            placeholder="Contraseña"
+                          />
+                          <div
+                            *ngIf="
+                              loginForm.get('contraseña')?.invalid &&
+                              loginForm.get('contraseña')?.touched
+                            "
+                            class="text-danger"
+                          >
+                            Por favor, ingrese su contraseña.
+                          </div>
+                        </div>
+                        <div class="mb-3 d-flex justify-content-center">
+                          <button
+                            class="btn d-block btn-secondary"
+                            type="submit"
+                            style="
+                              height: 40px;
+                              padding: initial;
+                              width: 150px;
+                              border-radius: 5px;
+                              border-width: 0px;
+                            "
+                          >
+                            Iniciar sesión
+                          </button>
+                        </div>
+                        <hr />
+                      </form>
+                      <div class="text-center">
+                        <span class="text-muted fs-6"
+                          >No estás registrado?
+                          <a class="text-primary" routerLink="/registro"
+                            >Registrate</a
+                          ></span
+                        >
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</header>
+<footer>
+  <div class="container">
+    <div class="row">
+      <div class="col-md-10 col-lg-8 mx-auto">
+        <p class="text-muted copyright">Copyright&nbsp;©&nbsp;Prácticas 2024</p>
+      </div>
+    </div>
+  </div>
+</footer>

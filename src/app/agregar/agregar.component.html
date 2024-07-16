@@ -1,0 +1,123 @@
+<nav
+  class="navbar navbar-expand-lg mt-auto navbar-light fixed-top"
+  id="mainNav"
+>
+  <div class="container">
+    <a class="navbar-brand" href="index.html">Prácticas</a>
+    <button
+      data-bs-toggle="collapse"
+      data-bs-target="#navbarResponsive"
+      class="navbar-toggler"
+      aria-controls="navbarResponsive"
+      aria-expanded="false"
+      aria-label="Toggle navigation"
+    >
+      <i class="fa fa-bars"></i>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarResponsive">
+      <ul class="navbar-nav ms-auto text-uppercase">
+        <li class="nav-item">
+          <a class="nav-link" routerLink="/acerca-de">Acerca de</a>
+        </li>
+        <li
+          *ngIf="
+            userActual && userActual.tipo === 'Estudiante' && userActual.tutor
+          "
+          class="nav-item"
+        >
+          <a class="nav-link" routerLink="/solicitud">Postular</a>
+        </li>
+        <li *ngIf="userActual && userActual.tipo === 'Admin'" class="nav-item">
+          <a class="nav-link" routerLink="/asignar">Asignar tutores</a>
+        </li>
+        <li
+          *ngIf="
+            userActual && userActual.tipo === 'Estudiante' && userActual.tutor
+          "
+          class="nav-item"
+        >
+          <a class="nav-link" routerLink="/agregar">Reportar tarea</a>
+        </li>
+        <li
+          *ngIf="userActual && userActual.tipo === 'Profesor'"
+          class="nav-item"
+        >
+          <a class="nav-link" routerLink="/seguimiento">Seguimiento</a>
+        </li>
+        <li *ngIf="!userActual" class="nav-item">
+          <a class="nav-link" routerLink="/login">Iniciar sesion</a>
+        </li>
+        <li *ngIf="userActual" class="nav-item">
+          <a (click)="cerrarSesion()" class="btn btn-danger">Cerrar sesión</a>
+        </li>
+      </ul>
+    </div>
+  </div>
+</nav>
+<header
+  class="masthead"
+  style="
+    background-image: url('/home-bg.jpg');
+    font-family: 'Open Sans', sans-serif;
+  "
+>
+  <div class="overlay"></div>
+  <div class="container">
+    <div class="row">
+      <div class="col-md-10 col-lg-8 mx-auto position-relative">
+        <div class="site-heading" style="font-family: 'Open Sans', sans-serif">
+          <div class="banner6">
+            <div class="row">
+              <div class="container">
+                <div class="col-12 align-justify-center pr-4 pl-0 contact-form">
+                  <h2 class="mb-4 text-white">Agregar tareas</h2>
+                  <form [formGroup]="tareaForm" (ngSubmit)="onSubmit()">
+                    <div class="row justify-content-center">
+                      <div class="col-7">
+                        <div class="form-group mb-3 text-start">
+                          <label for="">Titulo</label>
+                          <input
+                            type="text"
+                            class="input-group"
+                            formControlName="titulo"
+                          />
+                        </div>
+                      </div>
+                      <div class="col-7">
+                        <div class="form-group mb-3 text-start">
+                          <label for="">Detalles</label>
+                          <textarea
+                            class="input-group"
+                            rows="3"
+                            formControlName="detalles"
+                          ></textarea>
+                        </div>
+                      </div>
+                      <div class="col-lg-12">
+                        <button
+                          type="submit"
+                          class="btn btn-block text-white btn-info px-3 py-2 border-0 rounded"
+                        >
+                          <span>Agregar Tarea</span>
+                        </button>
+                      </div>
+                    </div>
+                  </form>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</header>
+<footer>
+  <div class="container">
+    <div class="row">
+      <div class="col-md-10 col-lg-8 mx-auto">
+        <p class="text-muted copyright">Copyright&nbsp;©&nbsp;Prácticas 2024</p>
+      </div>
+    </div>
+  </div>
+</footer>
